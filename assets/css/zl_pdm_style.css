@@ -1,0 +1,17 @@
+.zl_pdm_container {
+    padding: 30px 0;
+}
+
+.zl_pdm_container iframe {
+    width: 100% !important;
+    min-width: auto !important;
+    border: none;
+}
+
+.zl_pdm_container .styles__appChildrenContainer___1gAYY {
+    min-height: auto !important;
+}
+
+small {
+    display: contents !important;
+}

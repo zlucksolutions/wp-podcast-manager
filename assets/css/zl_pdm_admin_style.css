@@ -1,0 +1,73 @@
+.zl-button>p:nth-child(2n) {
+    margin-left: 10px;
+}
+
+.zl-button p.submit {
+    float: left;
+}
+
+.zl-button::after {
+    clear: both;
+}
+
+form.zl-admin-form .form-field>label {
+    padding: 3px 0px 8px 0px;
+}
+
+.zl-radio {
+    padding: 5px 0px 0px 0px;
+}
+
+.zl-radio span label,
+.zl-radio span input {
+    float: left;
+}
+
+.zl-radio span label {
+    margin-top: -7px;
+}
+
+.zl-radio span.after_ct input {
+    margin-left: 10px;
+}
+
+.zl-radio div,
+.zl-button div {
+    clear: both;
+}
+
+.zl-button p.submit {
+    padding-bottom: 10px;
+}
+
+.zl-podcast-setting {
+    background: #f7f7f7;
+    padding: 10px;
+    border: 1px solid #ece9e9;
+    -webkit-box-shadow: 5px 5px 10px #bfbfbf;
+    -moz-box-shadow: 5px 5px 10px #bfbfbf;
+    box-shadow: 5px 5px 10px #bfbfbf;
+    /* box-shadow: 3px 3px 7px 2px #ece9e9; */
+    /* border-bottom: 3px solid #dedede; */
+    /* border-right: 3px solid #dedede; */
+}
+
+.zl-button,
+.zl-podcast-setting .form-field {
+    /* background: #ececec; */
+    padding-left: 7px;
+    /* border-bottom: 3px solid #dedede; */
+}
+
+.zl-podcast-setting .form-field select {
+    margin-bottom: 7px;
+}
+
+
+/* form .zl-podcast-setting:nth-child(2),
+form .zl-podcast-setting:last-child,
+.zl-setting-2, */
+
+.zl-podcast-setting .form-field:last-child {
+    border-bottom: unset;
+}
