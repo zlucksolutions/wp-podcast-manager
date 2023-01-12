@@ -107,9 +107,10 @@ function zl_common_importer_podcast($errormsg, $zl_pdm_archive_page_slug, $zl_pd
                                             </div> -->
                                             <div class="form-field form-required term-name-wrap">
                                                 <label for="zl_anchor_fm_podcast_url"><b> <?php _e('Podcast URL', 'wp-podcasts-manager'); ?></b></label>
+                                                <p>Enter your podcast URL to collect episodes<br>
                                                 <input name="zl_anchor_fm_podcast_url" id="zl_anchor_fm_podcast_url" type="text" value="<?php echo esc_url($url) ?>" aria-required="true" required="required" />
-                                                <p>The Podcast URL, from where we can collect your podcasts. Guide to get the <br> 
-                                                    <small>(RSS feed for <a href="<?php echo esc_url('https://anchor.fm/s/10dabf00/podcast/rss'); ?>" target="_blank"><?php _e('Anchor FM'); ?></a>,
+                                                Example RSS Feed URL - <a href="https://audience.castos.com/feed" target="_blank">https://audience.castos.com/feed</a><br>
+                                                <small>(More examples <a href="<?php echo esc_url('https://anchor.fm/s/10dabf00/podcast/rss'); ?>" target="_blank"><?php _e('Anchor FM'); ?></a>,
                                                         <a href="<?php echo esc_url('https://feeds.soundcloud.com/users/soundcloud:users:492135420/sounds.rss'); ?>" target="_blank"><?php _e('Podbean'); ?></a>,
                                                         <a href="<?php echo esc_url('https://audience.castos.com/feed'); ?>" target="_blank"><?php _e('Apple'); ?></a>,
                                                         <a href="<?php echo esc_url('https://audience.castos.com/feed'); ?>" target="_blank"><?php _e('Google'); ?></a>,
@@ -117,7 +118,7 @@ function zl_common_importer_podcast($errormsg, $zl_pdm_archive_page_slug, $zl_pd
                                                         <a href="<?php echo esc_url('http://rss.art19.com/the-daily'); ?>" target="_blank"><?php _e('Simplecast'); ?></a>,
                                                         <a href="<?php echo esc_url('https://feeds.buzzsprout.com/1875696.rss'); ?>" target="_blank"><?php _e('Buzzsprout'); ?></a>,
                                                         <a href="<?php echo esc_url('https://feeds.simplecast.com/k6dY_SbZ'); ?>" target="_blank"><?php _e('Spotify'); ?></a>
-                                                    URL)</small>
+                                                    )</small>
                                                 </p>
                                             </div>                                    
                                             <div class="form-field form-required term-name-wrap" style="display: none;">
