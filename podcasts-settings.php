@@ -7,9 +7,9 @@ $tabs = [
         'scheduled-list'  => [
             'title'     => __( "Scheduled Imports", 'wp-podcasts-manager' )
         ],
-        'upgration'  => [
-            'title'     => __( "Upgrade", 'wp-podcasts-manager' )
-        ],
+        // 'upgration'  => [
+        //     'title'     => __( "Upgrade", 'wp-podcasts-manager' )
+        // ],
     ];
 
     if( !isset( $tabs[ $current_tab ] ) )
@@ -97,47 +97,6 @@ function zl_common_importer_podcast($errormsg, $zl_pdm_archive_page_slug, $zl_pd
                             <div class="form-wrap">
                                 <p><?php _e($errormsg, 'wp-podcasts-manager'); ?></p>
                                 <form id="add_zl_podcast_url" method="post" action="" class="validate zl-admin-form">
-                                    <div class="zl-podcast-setting" <?php if($cron === true){ echo 'style="display: none;"'; } ?>>
-                                        <h2><?php _e('General Settings.', 'wp-podcasts-manager'); ?></h2>
-                                        <div class="form-field form-required term-name-wrap">
-                                            <label for="zl_pdm_archive_page_slug"><b><?php _e('Podcasts Archive Page Slug', 'wp-podcasts-manager'); ?></b>
-                                                <div class="hint">
-                                                    <i class="hint-icon">i</i>
-                                                    <div class="hint-description"><?php _e('Leave empty if you are not sure what it is for.', 'wp-podcasts-manager'); ?></div>
-                                                </div>
-                                            </label>
-                                            <input name="zl_pdm_archive_page_slug" id="zl_pdm_archive_page_slug" type="text" value="<?php echo $zl_pdm_archive_page_slug; ?>" aria-required="true" />
-                                        </div>
-                                        <div class="form-field form-required term-name-wrap">
-                                            <label for="zl_pdm_embed_position"><b><?php _e('Podcasts Embed Position', 'wp-podcasts-manager'); ?></b>
-                                                <div class="hint">
-                                                    <i class="hint-icon">i</i>
-                                                    <div class="hint-description"><?php _e("Where you want to see the podcast."); ?></div>
-                                                </div>
-                                            </label>
-                                            <div class="zl-radio">
-                                                <span class="before_ct">
-                                                    <input type="radio" id="before_ct" class="zl-embed-position" name="zl_pdm_embed_position" value="before_ct" <?php echo (($zl_pdm_embed_position == 'before_ct') || empty($zl_pdm_embed_position)) ? 'checked' : ''; ?>><label for="before_ct">Before the content</label>
-                                                </span>
-                                                <span class="after_ct">
-                                                    <input type="radio" id="after_ct" class="zl-embed-position" name="zl_pdm_embed_position" value="after_ct" <?php echo ($zl_pdm_embed_position == 'after_ct') ? 'checked' : ''; ?>><label for="after_ct">After the content</label>
-                                                </span>
-                                                <div></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-field form-required term-name-wrap">
-                                            <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
-                                            <label for="zl_podcast_shortcode"><b>Podcast Shortcode</b></label>                                            
-                                            <div class="clipboard">
-                                                <input onclick="copy()" class="copy-input" value="<?php _e("[podcast category='cat1, cat2' podcast_per_page=10]", 'wp-podcasts-manager'); ?>" id="copyClipboard" readonly>
-                                                <button class="copy-btn" type="button" id="copyButton" onclick="copy()"><i class="far fa-copy"></i></button>
-                                            </div>
-                                            <div id="copied-success" class="copied">
-                                                <span>Copied!</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
                                     <div class="zl-podcast-setting zl-setting-2">
                                         <div <?php if($cron === true){ echo 'style="display: none;"'; } ?>>
                                             <h2><?php _e('We\'ll retrive your podcasts from this URL. ', 'wp-podcasts-manager'); ?></h2>
@@ -149,6 +108,17 @@ function zl_common_importer_podcast($errormsg, $zl_pdm_archive_page_slug, $zl_pd
                                             <div class="form-field form-required term-name-wrap">
                                                 <label for="zl_anchor_fm_podcast_url"><b> <?php _e('Podcast URL', 'wp-podcasts-manager'); ?></b></label>
                                                 <input name="zl_anchor_fm_podcast_url" id="zl_anchor_fm_podcast_url" type="text" value="<?php echo esc_url($url) ?>" aria-required="true" required="required" />
+                                                <p>The Podcast URL, from where we can collect your podcasts. Guide to get the <br> 
+                                                    <small>(RSS feed for <a href="<?php echo esc_url('https://anchor.fm/s/10dabf00/podcast/rss'); ?>" target="_blank"><?php _e('Anchor FM'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://feeds.soundcloud.com/users/soundcloud:users:492135420/sounds.rss'); ?>" target="_blank"><?php _e('Podbean'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://audience.castos.com/feed'); ?>" target="_blank"><?php _e('Apple'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://audience.castos.com/feed'); ?>" target="_blank"><?php _e('Google'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://feeds.acast.com/public/shows/5d28ef74d3cc3f013778b13b'); ?>" target="_blank"><?php _e('Acast'); ?></a>,
+                                                        <a href="<?php echo esc_url('http://rss.art19.com/the-daily'); ?>" target="_blank"><?php _e('Simplecast'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://feeds.buzzsprout.com/1875696.rss'); ?>" target="_blank"><?php _e('Buzzsprout'); ?></a>,
+                                                        <a href="<?php echo esc_url('https://feeds.simplecast.com/k6dY_SbZ'); ?>" target="_blank"><?php _e('Spotify'); ?></a>
+                                                    URL)</small>
+                                                </p>
                                             </div>                                    
                                             <div class="form-field form-required term-name-wrap" style="display: none;">
                                                 <label for="zl_get_post_type"><b><?php _e('Post Type', 'wp-podcasts-manager'); ?></b></label>
@@ -192,6 +162,47 @@ function zl_common_importer_podcast($errormsg, $zl_pdm_archive_page_slug, $zl_pd
                                             }
                                             ?>
                                             <div></div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="zl-podcast-setting" <?php if($cron === true){ echo 'style="display: none;"'; } ?>>
+                                        <h2><?php _e('General Settings.', 'wp-podcasts-manager'); ?></h2>
+                                        <div class="form-field form-required term-name-wrap">
+                                            <label for="zl_pdm_archive_page_slug"><b><?php _e('Podcasts Archive Page Slug', 'wp-podcasts-manager'); ?></b>
+                                                <div class="hint">
+                                                    <i class="hint-icon">i</i>
+                                                    <div class="hint-description"><?php _e('Leave empty if you are not sure what it is for.', 'wp-podcasts-manager'); ?></div>
+                                                </div>
+                                            </label>
+                                            <input name="zl_pdm_archive_page_slug" id="zl_pdm_archive_page_slug" type="text" value="<?php echo $zl_pdm_archive_page_slug; ?>" aria-required="true" />
+                                        </div>
+                                        <div class="form-field form-required term-name-wrap">
+                                            <label for="zl_pdm_embed_position"><b><?php _e('Podcasts Embed Position', 'wp-podcasts-manager'); ?></b>
+                                                <div class="hint">
+                                                    <i class="hint-icon">i</i>
+                                                    <div class="hint-description"><?php _e("Where you want to see the podcast."); ?></div>
+                                                </div>
+                                            </label>
+                                            <div class="zl-radio">
+                                                <span class="before_ct">
+                                                    <input type="radio" id="before_ct" class="zl-embed-position" name="zl_pdm_embed_position" value="before_ct" <?php echo (($zl_pdm_embed_position == 'before_ct') || empty($zl_pdm_embed_position)) ? 'checked' : ''; ?>><label for="before_ct">Before the content</label>
+                                                </span>
+                                                <span class="after_ct">
+                                                    <input type="radio" id="after_ct" class="zl-embed-position" name="zl_pdm_embed_position" value="after_ct" <?php echo ($zl_pdm_embed_position == 'after_ct') ? 'checked' : ''; ?>><label for="after_ct">After the content</label>
+                                                </span>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-field form-required term-name-wrap">
+                                            <script src="https://kit.fontawesome.com/d97b87339f.js" crossorigin="anonymous"></script>
+                                            <label for="zl_podcast_shortcode"><b>Podcast Shortcode</b></label>                                            
+                                            <div class="clipboard">
+                                                <input onclick="copy()" class="copy-input" value="<?php _e("[zl_podcast cat='name1, name2' limit=10]", 'wp-podcasts-manager'); ?>" id="copyClipboard" readonly>
+                                                <button class="copy-btn" type="button" id="copyButton" onclick="copy()"><i class="far fa-copy"></i></button>
+                                            </div>
+                                            <div id="copied-success" class="copied">
+                                                <span>Copied!</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

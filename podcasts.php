@@ -48,9 +48,9 @@ function zl_pdm_register_post_type_podcast()
         'thumbnail', // featured images
     );
     $labels = array(
-        'name' => _x($plg_name . 's', 'plural'),
+        'name' => _x('WP ' . $plg_name . 's', 'plural'),
         'singular_name' => _x($plg_name, 'singular'),
-        'menu_name' => _x($plg_name . 's', 'admin menu'),
+        'menu_name' => _x('WP ' . $plg_name . 's', 'admin menu'),
         'name_admin_bar' => _x($plg_name, 'admin bar'),
         'add_new' => _x('Add New', 'add new'),
         'add_new_item' => __('Add New ' . $plg_name),
@@ -368,13 +368,13 @@ function zl_podcast_shortcode($atts)
 {
     ob_start();
     $attr = shortcode_atts(array(
-        'category' => '',
-        'podcast_per_page' => 10,
+        'cat' => '',
+        'limit' => 10,
     ), $atts);
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $args = array(
         'post_type' => 'zl_podcast',
-        'posts_per_page' => $attr['podcast_per_page'],
+        'posts_per_page' => $attr['limit'],
         'post_status' => 'publish',
         'order' => 'ASC',
         'paged' => $paged,
@@ -391,8 +391,8 @@ function zl_podcast_shortcode($atts)
             ),
         )
     );
-    if (isset($attr['category']) && !empty($attr['category'])) {
-        $cat_array = explode(",", $attr['category']);
+    if (isset($attr['cat']) && !empty($attr['cat'])) {
+        $cat_array = explode(",", $attr['cat']);
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'pd-cat',
@@ -415,7 +415,7 @@ function zl_podcast_shortcode($atts)
     }
     return ob_get_clean();
 }
-add_shortcode('podcast', 'zl_podcast_shortcode');
+add_shortcode('zl_podcast', 'zl_podcast_shortcode');
 
 //add pagination
 function zl_pagination($post_qry, $args = array())
