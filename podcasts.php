@@ -4,7 +4,7 @@
  * Plugin Name: WP Podcasts Manager
  * Plugin URI: https://www.zluck.com/
  * Description: This is the Podcast plugin, that will collect podcasts from Anchor.FM services and much more podcast services platforms. It also allows to create new podcasts.
- * Version: 2.2
+ * Version: 2.0.1
  * Author: Zluck
  * Author URI: https://zluck.com/
  **/

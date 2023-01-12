@@ -25,8 +25,8 @@ The plugin supports importing episodes as a custom post type, assigning categori
 
 - Very Easy process to Setup
 - Fetch all required details from the feed URL
-- Option to select Posttype & Category while import
-- Option to modify fetched details of your podcast.
+- Option to set Posttype & Category while import
+- Option to modify fetched details of your podcast
 - Easily add new custom podcast by podcast link
 - Complete Shortcode to display podcasts in any pages - [podcast category='cat1, cat2' podcast_per_page=10]
 - Responsive layout for all device sizes
@@ -65,6 +65,7 @@ If you have a copy of the plugin as a zip file, you can manually upload it and i
 1. The import does not work for my podcast feed - First of all, make sure you are filling in a valid URL, of a valid podcast RSS feed. Second, make sure your server is up to modern requirements – we recommend PHP 7 or above.
 2. The import failed or takes too much time to process? - You can run the importer multiple times, as it will never import the same post twice. Once all episodes are imported, only future ones would be imported, assuming you selected the continuous import option. If you import a large feed while importing featured images, it may take several runs to fully complete, so make sure to run the import process several times until all episodes were imported.
 3. Do you support podcast feeds from any host? - Nope. Right now we have allowed only anchor.fm podcast feed URL.
+4. The episodes page does not work and siplay the page not found? - Update your permalink once after sync the podcasts. 
 
 
 == Changelog ==
