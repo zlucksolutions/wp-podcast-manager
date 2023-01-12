@@ -1,11 +1,11 @@
 === WP Podcasts Manager ===
-Contributors: zluck
+Contributors: zluck, divyeshk71
 Plugin link: https://www.zluck.com/
-Tags: Podcasts, Anchor.fm, Podcast
-Requires at least: 4.4
-Tested up to: 5.5.1
-Requires PHP: 5.4
-Stable tag: 1.0
+Tags: Podcasts, Anchor.fm, Podcast, Anchor fm, Podcast manager, Podbean, Apple, google, Acast, simplecast, buzzsprout, Spotify
+Requires at least: 7.0
+Tested up to: 6.0.3
+Requires PHP: 7.0
+Stable tag: 1.2
 Author: Zluck
 Author URI: https://www.zluck.com/
 License: GPLv2 or later
@@ -15,4 +15,67 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This is the Podcast plugin, that will collect podcasts from Anchor.FM services. It also allows to create new podcasts.
+Sync Podcast RSS feeds with your WordPress website automatically. The WP Podcast Manager plugin helps to easily import podcasts into WordPress.
+
+WP Podcast Manager provides an easy way to show and play Anchor.fm, Podbean, Apple, google, Acast, simplecast, buzzsprout & Spotify podcasts using the` podcasting feed URL. WP Podcast manager plugin is to Publish and manage your podcast directly from your WordPress website. It is a must-have plugin for your podcast website. Give your listeners easy access to all your episodes from any page or even from all the pages of your website.
+
+The plugin supports importing episodes as a custom post type, assigning categories, importing featured images, and more.
+
+== Key Features ==
+
+- Very Easy process to Setup
+- Fetch all required details from the feed URL
+- Option to select Posttype & Category while import
+- Option to modify fetched details of your podcast.
+- Easily add new custom podcast by podcast link
+- Complete Shortcode to display podcasts in any pages - [podcast category='cat1, cat2' podcast_per_page=10]
+- Responsive layout for all device sizes
+- Assign category for the individual podcast in import time
+- Assign/Change Podcast author easily
+- Show/Hide Podcasts easily
+- Set cron time to fetch the new podcast every X minutes
+- Set the position of the podcast player after content or before content
+- Set the Archive page slug
+
+
+== Installation ==
+
+= Installation via Wordpress plugin installer =
+
+1. Navigate to WordPress Dashboard > Plugins > Add New.
+2. Use the search form in the top-right and search “**WP Podcast Manager**”.
+3. Select the WP Podcast Manager plugin by Vedathemes.
+4. Click the **Install Now** button to install the plugin.
+5. Click **Activate** to activate the plugin.
+
+
+= Manually installing the plugin using a zip file =
+
+If you have a copy of the plugin as a zip file, you can manually upload it and install it through the Plugin’s admin screen.
+
+1. Navigate to **WordPress Dashboard > Plugins > Add New**
+2. Click the **Upload Plugin** button at the top of the screen.
+3. Select the zip file from your local filesystem.
+4. Click the **Install Now** button.
+5. When the installation is complete, you’ll see “Plugin installed successfully.” Click the **Activate Plugin** button at the bottom of the page.
+
+
+== Frequently Asked Questions ==
+
+1. The import does not work for my podcast feed - First of all, make sure you are filling in a valid URL, of a valid podcast RSS feed. Second, make sure your server is up to modern requirements – we recommend PHP 7 or above.
+2. The import failed or takes too much time to process? - You can run the importer multiple times, as it will never import the same post twice. Once all episodes are imported, only future ones would be imported, assuming you selected the continuous import option. If you import a large feed while importing featured images, it may take several runs to fully complete, so make sure to run the import process several times until all episodes were imported.
+3. Do you support podcast feeds from any host? - Nope. Right now we have allowed only anchor.fm podcast feed URL.
+
+
+== Changelog ==
+= 1.2 =
+* Added support of Podbean, Apple, google, Acast, simplecast, buzzsprout & Spotify podcasts
+* Shortcodes added to Display Podcasts
+* Code Cleanup
+* Fixed Plugin Deactivation Error
+
+= 1.1 =
+* Changes to be compatible with Latest Wordpress
+
+= 1.0 =
+* Initial Launch
