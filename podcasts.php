@@ -3,8 +3,8 @@
 /**
  * Plugin Name: WP Podcasts Manager
  * Plugin URI: https://www.zluck.com/
- * Description: This is the Podcast plugin, that will collect podcasts from Anchor.FM services. It also allows to create new podcasts.
- * Version: 1.0
+ * Description: This is the Podcast plugin, that will collect podcasts from Anchor.FM services and much more podcast services platforms. It also allows to create new podcasts.
+ * Version: 2.2
  * Author: Zluck
  * Author URI: https://zluck.com/
  **/
@@ -14,6 +14,7 @@ define( "PODCAST_IMPORTER_ALIAS", 'wp_podcasts_manager' );
 define( "PODCAST_IMPORTER_PREFIX", 'wp-podcasts-manager' );
 
 include_once('classes/class-episode-import.php');
+require_once('podcasts-cron.php');
 
 function zl_pdm_enque_style()
 {
@@ -47,9 +48,9 @@ function zl_pdm_register_post_type_podcast()
         'thumbnail', // featured images
     );
     $labels = array(
-        'name' => _x($plg_name . 's', 'plural'),
+        'name' => _x('WP ' . $plg_name . 's', 'plural'),
         'singular_name' => _x($plg_name, 'singular'),
-        'menu_name' => _x($plg_name . 's', 'admin menu'),
+        'menu_name' => _x('WP ' . $plg_name . 's', 'admin menu'),
         'name_admin_bar' => _x($plg_name, 'admin bar'),
         'add_new' => _x('Add New', 'add new'),
         'add_new_item' => __('Add New ' . $plg_name),
@@ -62,6 +63,7 @@ function zl_pdm_register_post_type_podcast()
         'not_found' => __('No ' . $plg_name . ' found.'),
     );
     $args = array(
+        'menu_icon' => 'dashicons-rss',
         'supports' => $supports,
         'labels' => $labels,
         'public' => true,
@@ -191,16 +193,21 @@ function zl_pdm_podcast_settings_page_callback()
 add_action('transition_post_status', 'zl_pdm_check_on_post_status_change', 10, 3);
 function zl_pdm_check_on_post_status_change($new_status, $old_status, $post)
 {
-    if ($post->post_type == 'zl_podcast' && $old_status != 'new' && isset($_POST['zl_pd_link']) && isset($_POST['zl_pd_service'])) {
-        update_post_meta($post->ID, 'zl_pd_link', sanitize_meta('zl_pd_link', $_POST['zl_pd_link'], 'post'));
+    if ($post->post_type == 'zl_podcast' && $old_status != 'new' && isset($_POST['zl_pd_link'])) {
+        //update_post_meta($post->ID, 'zl_pd_link', sanitize_meta('zl_pd_link', $_POST['zl_pd_link'], 'post'));
         update_post_meta($post->ID, 'zl_pd_service', sanitize_meta('zl_pd_service', $_POST['zl_pd_service'], 'post'));
         update_post_meta($post->ID, 'zl_pd_hide', sanitize_text_field($_POST['zl_pd_hide']));
+        // strips out any possible weirdness in the file url
+        $url = preg_replace('/(?s:.*)(https?:\/\/(?:[\w\-\.]+[^#?\s]+)(?:\.mp3))(?s:.*)/', '$1', sanitize_text_field($_POST['zl_pd_link']));
+        // Set the audio_file
+        update_post_meta($post->ID, 'audio_file', $url);
         if ($old_status == 'draft' && !metadata_exists('post', $post->ID, 'zl_imported')) {
             add_post_meta($post->ID, 'zl_imported', '0');
             // update_metadata('post', $post->ID, 'zl_imported','0');
         }
     }
 }
+
 /* Add custom post meta tag */
 add_action('edit_form_after_title', 'zl_pdm_add_meta_fields');
 function zl_pdm_add_meta_fields()
@@ -208,7 +215,7 @@ function zl_pdm_add_meta_fields()
     global $post;
     if ($post->post_type == 'zl_podcast') {
         $post_meta      = get_post_meta($post->ID);
-        $pd_link        = isset($post_meta['zl_pd_link'][0]) ? $post_meta['zl_pd_link'][0] : '';
+        $pd_link        = isset($post_meta['audio_file'][0]) ? $post_meta['audio_file'][0] : '';
         $pd_service     = isset($post_meta['zl_pd_service'][0]) ? $post_meta['zl_pd_service'][0] : '';
         $pd_hide   = !empty(get_post_meta($post->ID, 'zl_pd_hide', true)) ? get_post_meta($post->ID, 'zl_pd_hide', true) : '';
         $pd_services    = array('other' => 'Other', 'anchor-fm' => 'Anchor FM');
@@ -216,15 +223,23 @@ function zl_pdm_add_meta_fields()
         <div class="form-wrap">
             <br><br />
             <div class="postbox">
-                <h2 class="hndle"><span><?php _e('Podcast Link', 'zl_podcast'); ?></span></h2>
+                <h2 class="hndle"><span><?php _e('Podcast Player Link', 'zl_podcast'); ?></span></h2>
                 <div class="inside">
                     <div class="form-field form-required term-name-wrap">
-                        <input name="zl_pd_link" id="zl_anchor_fm_podcast_url" type="text" value="<?php echo $pd_link; ?>" aria-required="true" required="required" />
-                        <p class="zl-exam"><?php _e('For eg. <a href="' . esc_url('https://anchor.fm/askavie/episodes/Hyperlinks-in-Anchor-evici') . '" target="_blank">xyz.com/dfsd</a> it will be embedded using iframe'); ?></p>
+                        <input name="zl_pd_link" id="zl_anchor_fm_podcast_url" type="url" value="<?php echo $pd_link; ?>" aria-required="true" required="required" />
+                        <p class="zl-exam"><?php _e('For eg. <a href="' . esc_url('https://chtbl.com/track/28D482/episodes.castos.com/audience/4310/315d6718-d307-41fe-bac0-79e3e346d51e/Dirt-Cheap-Reair.mp3') . '" target="_blank">xyz.com/dfsd</a> it will be embedded using iframe'); ?></p>
                     </div>
                 </div>
+                <h2 class="hndle"><span><?php _e('Podcast', 'zl_podcast'); ?></span></h2>
+                <div class="inside">
+                    <div class="form-field form-required term-name-wrap">
+                        <input type="radio" name="zl_pd_hide" value="show" <?php if ($pd_hide === "show" || empty($pd_hide)) { echo "checked"; } ?>> <?php _e(' Show ', 'zl_podcast'); ?> </input> 
+                        <input type="radio" name="zl_pd_hide" value="hide" <?php if ($pd_hide === "hide") { echo "checked"; } ?>> <?php _e(' Hide', 'zl_podcast'); ?></input>
+                        <p class="zl-exam"></p>
+                    </div>
+                </div> 
             </div>
-            <div class="postbox">
+            <?php /* <div class="postbox">
                 <h2 class="hndle"><span><?php _e('Podcast Service', 'zl_podcast'); ?></span></h2>
                 <div class="inside">
                     <div class="form-field form-required term-name-wrap">
@@ -238,27 +253,24 @@ function zl_pdm_add_meta_fields()
                         <p class="zl-exam"></p>
                     </div>
                 </div>
-            </div>
-            <div class="postbox">
-                <h2 class="hndle"><span><?php _e('Podcast', 'zl_podcast'); ?></span></h2>
+            </div> */ ?>
+            <!-- <div class="postbox">
+                <h2 class="hndle"><span><?php //_e('Podcast', 'zl_podcast'); ?></span></h2>
                 <div class="inside">
                     <div class="form-field form-required term-name-wrap">
-                        <input name="zl_pd_hide" id="zl_checkbox_fm_podcast_hide" type="checkbox" value="hide" <?php if ($pd_hide === "hide" && !empty($pd_hide)) {
-                                                                                                                    echo "checked";
-                                                                                                                } ?> /><span><?php _e('Hide', 'zl_podcast'); ?></span>
+                        <input type="radio" name="zl_pd_hide" value="show" <?php //if ($pd_hide === "show") { echo "checked"; } ?>> <?php //_e(' Show ', 'zl_podcast'); ?> </input> 
+                        <input type="radio" name="zl_pd_hide" value="hide" <?php //if ($pd_hide === "hide") { echo "checked"; } ?>> <?php //_e(' Hide', 'zl_podcast'); ?></input>
                         <p class="zl-exam"></p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     <?php
     }
 }
 
-require_once('podcasts-cron.php');
-
 // unschedule event upon plugin deactivation
-register_deactivation_hook(__FILE__, 'cronstarter_deactivate');
+register_deactivation_hook(__FILE__, 'zl_pdm_cronstarter_deactivate');
 function get_local_file_path($file)
 {
     // Identify file by root path and not URL (required for getID3 class)
@@ -356,14 +368,16 @@ function zl_podcast_shortcode($atts)
 {
     ob_start();
     $attr = shortcode_atts(array(
-        'category' => '',
-        'podcast_per_page' => 10,
+        'cat' => '',
+        'limit' => 10,
     ), $atts);
+    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $args = array(
         'post_type' => 'zl_podcast',
-        'posts_per_page' => $attr['podcast_per_page'],
+        'posts_per_page' => $attr['limit'],
         'post_status' => 'publish',
         'order' => 'ASC',
+        'paged' => $paged,
         'meta_query' => array(
             'relation' => 'OR',
             array(
@@ -377,8 +391,8 @@ function zl_podcast_shortcode($atts)
             ),
         )
     );
-    if (isset($attr['category']) && !empty($attr['category'])) {
-        $cat_array = explode(",", $attr['category']);
+    if (isset($attr['cat']) && !empty($attr['cat'])) {
+        $cat_array = explode(",", $attr['cat']);
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'pd-cat',
@@ -401,7 +415,7 @@ function zl_podcast_shortcode($atts)
     }
     return ob_get_clean();
 }
-add_shortcode('podcast', 'zl_podcast_shortcode');
+add_shortcode('zl_podcast', 'zl_podcast_shortcode');
 
 //add pagination
 function zl_pagination($post_qry, $args = array())
