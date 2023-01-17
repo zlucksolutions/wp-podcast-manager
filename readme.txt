@@ -62,10 +62,21 @@ If you have a copy of the plugin as a zip file, you can manually upload it and i
 
 == Frequently Asked Questions ==
 
-1. The import does not work for my podcast feed - First of all, make sure you are filling in a valid URL, of a valid podcast RSS feed. Second, make sure your server is up to modern requirements – we recommend PHP 7 or above.
-2. The import failed or takes too much time to process? - You can run the importer multiple times, as it will never import the same post twice. Once all episodes are imported, only future ones would be imported, assuming you selected the continuous import option. If you import a large feed while importing featured images, it may take several runs to fully complete, so make sure to run the import process several times until all episodes were imported.
-3. Do you support podcast feeds from any host? - Nope. Right now we have allowed only anchor.fm, Podbean, Apple, google, Acast, simplecast, buzzsprout & Spotify podcasts feed URL.
-4. The episodes page does not work and display the page not found? - Update your permalink once after sync the podcasts. 
+= The import does not work for my podcast feed? =
+
+First of all, make sure you are filling in a valid URL, of a valid podcast RSS feed. Second, make sure your server is up to modern requirements – we recommend PHP 7 or above.
+
+= The import failed or takes too much time to process? = 
+
+You can run the importer multiple times, as it will never import the same post twice. Once all episodes are imported, only future ones would be imported, assuming you selected the continuous import option. If you import a large feed while importing featured images, it may take several runs to fully complete, so make sure to run the import process several times until all episodes were imported.
+
+= Do you support podcast feeds from any host? = 
+
+Nope. Right now we have allowed only anchor.fm, Podbean, Apple, google, Acast, simplecast, buzzsprout & Spotify podcasts feed URL.
+
+= The episodes page does not work and display the page not found? = 
+
+Update your permalink once after sync the podcasts.
 
 
 == Changelog ==
