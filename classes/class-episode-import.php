@@ -44,7 +44,7 @@ class RSS_Import_Handler
         // 		'message' => $msg,
         // 	);
         // }
-        if ($this->feed_object->channel->item == '') {
+        if ($this->feed_object->channel->item->count() == 0) {
             return array(
                 'status'   => 'error',
                 'message'  => '' . $this->rss_feed . ' is not a valid URL!!',

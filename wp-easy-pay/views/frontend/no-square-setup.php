@@ -1,1 +1,0 @@
-<p> Please enable square form the admin dashboard. The form cannot be displayed without Square. </p>
