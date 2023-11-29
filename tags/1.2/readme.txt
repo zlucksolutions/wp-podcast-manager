@@ -3,9 +3,9 @@ Contributors: zluck, divyeshk71
 Plugin link: https://www.zluck.com/
 Tags: Podcasts, Anchor.fm, Podcast, Anchor fm, Podcast manager, Podbean, Apple, google, Acast, simplecast, buzzsprout, Spotify
 Requires at least: 5.6
-Tested up to: 6.3
+Tested up to: 6.0.3
 Requires PHP: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.2
 Author: Zluck
 Author URI: https://www.zluck.com/
 License: GPLv2 or later
