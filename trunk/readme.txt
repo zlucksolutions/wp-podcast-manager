@@ -3,9 +3,9 @@ Contributors: zluck, divyeshk71
 Plugin link: https://www.zluck.com/
 Tags: Podcasts, Anchor.fm, Podcast, Anchor fm, Podcast manager, Podbean, Apple, google, Acast, simplecast, buzzsprout, Spotify
 Requires at least: 5.6
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.3
 Author: Zluck
 Author URI: https://www.zluck.com/
 License: GPLv2 or later
@@ -80,6 +80,10 @@ Update your permalink once after sync the podcasts.
 
 
 == Changelog ==
+
+= 1.3 =
+* Changes to be compatible with Latest Wordpress
+
 = 1.2 =
 * Added support of Podbean, Apple, google, Acast, simplecast, buzzsprout & Spotify podcasts
 * Shortcodes added to Display Podcasts
